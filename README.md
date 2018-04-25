@@ -1,4 +1,5 @@
 # ppl-client
 
-node_modules muss nachinstalliert werden.
-start mit npm start
+node_modules muss nach installiert werden.
+
+start mit startPeakPowerLeasingSystem.bat bzw. npm run electron
