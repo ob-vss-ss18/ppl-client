@@ -13,10 +13,14 @@ export class AppComponent {
   billMailResponse = '...';
   customerResponse = '...';
   reservationResponse = '...';
+  corsanywhere = 'https://cors-anywhere.herokuapp.com/';
 
   pplStock() {
     let self = this
-    fetch('https://ppl-stock.herokuapp.com/')
+
+    // cors-anywhere
+
+    fetch(this.corsanywhere + 'https://ppl-stock.herokuapp.com/')
       .then(function (response) {
         return response.text();
       }).then(function (text) {
@@ -27,7 +31,7 @@ export class AppComponent {
 
   authStock() {
     let self = this
-    fetch('https://ppl-auth.herokuapp.com/')
+    fetch(this.corsanywhere + 'https://ppl-auth.herokuapp.com/')
       .then(function (response) {
         return response.text();
       }).then(function (text) {
@@ -38,7 +42,7 @@ export class AppComponent {
 
   priceCalStock() {
     let self = this
-    fetch('https://ppl-pricecalculator.herokuapp.com/')
+    fetch(this.corsanywhere + 'https://ppl-pricecalculator.herokuapp.com/')
       .then(function (response) {
         return response.text();
       }).then(function (text) {
@@ -49,7 +53,7 @@ export class AppComponent {
 
   leasingStock() {
     let self = this
-    fetch('https://ppl-leasing.herokuapp.com/')
+    fetch(this.corsanywhere + 'https://ppl-leasing.herokuapp.com/')
       .then(function (response) {
         return response.text();
       }).then(function (text) {
@@ -60,7 +64,7 @@ export class AppComponent {
 
   billMailStock() {
     let self = this
-    fetch('https://ppl-billingandmailing.herokuapp.com/')
+    fetch(this.corsanywhere + 'https://ppl-billingandmailing.herokuapp.com/')
       .then(function (response) {
         return response.text();
       }).then(function (text) {
@@ -71,7 +75,7 @@ export class AppComponent {
 
   customerStock() {
     let self = this
-    fetch('https://ppl-customer.herokuapp.com/')
+    fetch(this.corsanywhere + 'https://ppl-customer.herokuapp.com/')
       .then(function (response) {
         return response.text();
       }).then(function (text) {
@@ -82,7 +86,7 @@ export class AppComponent {
 
   reservationStock() {
     let self = this
-    fetch('https://ppl-reservation.herokuapp.com/')
+    fetch(this.corsanywhere + 'https://ppl-reservation.herokuapp.com/')
       .then(function (response) {
         return response.text();
       }).then(function (text) {

@@ -1,5 +1,6 @@
 # ppl-client
 
-node_modules muss nach installiert werden.
+https://ppl-client.herokuapp.com/
 
-start mit startPeakPowerLeasingSystem.bat bzw. npm run electron
+1. node_modules muss entpackt werden: .../ppl-client/node_modules/...
+2. start mit startPeakPowerLeasingSystem.bat bzw. npm run electron
