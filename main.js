@@ -1,7 +1,6 @@
-const {app, BrowserWindow, Menu} = require('electron')
+const {app, BrowserWindow,Menu} = require('electron')
   const path = require('path')
   const url = require('url')
-  const shell = require('electron').shell
   
   // Behalten Sie eine globale Referenz auf das Fensterobjekt. 
   // Wenn Sie dies nicht tun, wird das Fenster automatisch geschlossen, 
@@ -14,13 +13,13 @@ const {app, BrowserWindow, Menu} = require('electron')
   
     // und Laden der index.html der App.
     win.loadURL(url.format({
-      pathname: path.join(__dirname, 'src/index.html'),
+      pathname: path.join(__dirname, 'dist/index.html'),
       protocol: 'file:',
       slashes: true
     }))
   
     // Öffnen der DevTools.
-    win.webContents.openDevTools()
+    //win.webContents.openDevTools()
   
     // Ausgegeben, wenn das Fenster geschlossen wird.
     win.on('closed', () => {
@@ -30,11 +29,8 @@ const {app, BrowserWindow, Menu} = require('electron')
       win = null
     })
 
-
     Menu.setApplicationMenu(null)
   }
-
-
   
   // Diese Methode wird aufgerufen, wenn Electron mit der
   // Initialisierung fertig ist und Browserfenster erschaffen kann.
