@@ -3,15 +3,32 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { DemoComponent } from './demo/demo.component';
+import { EquipmentComponent } from './equipment/equipment.component';
+import { CustomerComponent } from './customer/customer.component';
+import { RentalComponent } from './rental/rental.component';
+
 
 const routes: Routes = [
     {
         path: '',
-        component: DemoComponent
+       // component: DemoComponent
+        component: EquipmentComponent
     },
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'equipment',
+        component: EquipmentComponent
+    },
+    {
+        path: 'customer',
+        component: CustomerComponent
+    },
+    {
+        path: 'rental',
+        component: RentalComponent
     }
 ];
 
