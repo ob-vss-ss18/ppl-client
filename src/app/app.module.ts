@@ -9,6 +9,7 @@ import { DemoComponent } from './demo/demo.component';
 import { EquipmentComponent } from './equipment/equipment.component';
 import { CustomerComponent } from './customer/customer.component';
 import { RentalComponent } from './rental/rental.component';
+import { LoginCustomerComponent } from './login-customer/login-customer.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { RentalComponent } from './rental/rental.component';
     DemoComponent,
     EquipmentComponent,
     CustomerComponent,
-    RentalComponent
+    RentalComponent,
+    LoginCustomerComponent
   ],
   imports: [
     BrowserModule,
