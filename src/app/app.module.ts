@@ -10,6 +10,10 @@ import { EquipmentComponent } from './equipment/equipment.component';
 import { CustomerComponent } from './customer/customer.component';
 import { RentalComponent } from './rental/rental.component';
 import { LoginCustomerComponent } from './login-customer/login-customer.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -20,12 +24,15 @@ import { LoginCustomerComponent } from './login-customer/login-customer.componen
     EquipmentComponent,
     CustomerComponent,
     RentalComponent,
-    LoginCustomerComponent
+    LoginCustomerComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgxElectronModule,
+    NgbModule.forRoot(),
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

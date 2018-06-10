@@ -1,164 +1,106 @@
-<body>
-        <div id="header"> 
-            &nbsp;
-            </div>
-    <div id="wrapper">
-        <table>
-            <th>
-                <div id="sidebar-wrapper">
-                    <ul class="sidebar-nav">
-                        <li>
-                            <a routerLink="/equipment">Equipment</a>
-                        </li>
-                        <li>
-                            <a routerLink="/customer">Kunden</a>
-                        </li>
-                        <li>
-                            <a routerLink="/rental">Verleih</a>
-                        </li>
-                    </ul>
-                </div>
-
-            </th>
-
-
-            <th>
-
-
-
-                                <!-- CONTENT Begin-->
-
-<!-- Table Begin-->
-                <div class="page-content-wrapper">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p></p>
-                                <div class="row">
-                                    <p></p>
-                                    <div class="col-md-10 col-md-offset-1">
-                                        <div class="panel panel-default panel-table">
-
-
-                                            
-
-                                            <div class="panel-body">
-                                                <table class="table table-striped table-bordered table-list" width="100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>
-                                                                <em class="fa ddfa-cog"></em>
-                                                            </th>
-
-                                                            <th>Name</th>
-                                                            <th>Vorname</th>
-                                                            <th>Geburtstag</th>
-                                                            <th>Anschrift</th>
-
-                                                            <th class="hidden-xs">ID</th>
-
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td align="center">
-                                                                <a class="btn btn-danger">
-                                                                    x
-                                                                </a>
-                                                            </td>
-
-                                                            <td>Potter</td>
-                                                            <td>Harry</td>
-                                                            <td>31.07.1980</td>
-                                                            <td>Grimmauld Place 12</td>
-
-                                                            <td class="hidden-xs">1</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                           
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
- <!-- Table End -->
-                <!-- Edit Panel Begin-->
-                <div class="card-body">
-                    <form>
-                        <div class="form-group">
-                            <p>Neuer Kunde</p>
-                            <div class="form-row">
-                                <div class="col-md-6">
-                                    <input class="form-control" id="firstName" type="text" aria-describedby="nameHelp" placeholder="Vorname">
-                                </div>
-                                <div class="col-md-6">
-                                    <input class="form-control" id="lastName" type="text" aria-describedby="nameHelp" placeholder="Name">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="form-row">
-                                <div class="col-md-6">
-                                    <input class="form-control" id="birthday" type="date">
-                                </div>
-                                <div class="col-md-6">
-                                    <input class="form-control" id="phonenumber" type="tel" placeholder="Telefonnummer">
-                                </div>
-                            </div>
-                        </div>
-
-                        <br>
-
-                        <div class="form-group">
-                            <div class="form-row">
-                                <div class="col-md-9">
-                                    <input class="form-control" id="street" type="text" aria-describedby="nameHelp" placeholder="Straße">
-                                </div>
-                                <div class="col-md-3">
-                                    <input class="form-control" id="streetnumber" type="text" aria-describedby="nameHelp" placeholder="Nr">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="form-row">
-                                <div class="col-md-3">
-                                    <input class="form-control" id="zipcode" type="text" aria-describedby="nameHelp" placeholder="PLZ">
-                                </div>
-                                <div class="col-md-9">
-                                    <input class="form-control" id="city" type="text" aria-describedby="nameHelp" placeholder="Ort">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <input class="form-control" id="country" type="text" aria-describedby="nameHelp" placeholder="Land">
-                        </div>
-
-                        <br>
-
-                        <div class="form-group">
-                            <input class="form-control" id="email" type="email" aria-describedby="emailHelp" placeholder="E-Mail">
-                        </div>
-
-
-
-                        <div class="col col-xs-6 text-right">
-                            <button type="button" class="btn btn-create">Hinzufügen</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- Edit Panel End-->
-
-                <!-- CONTENT End-->
-            </th>
+<div class="container">
+    <div class="reglist">
+        <form class="form-inline my-2 my-lg-0" class="text-right">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search-TODO</button>
+        </form>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <!-- <th>#</th> -->
+                    <th>Vorname</th>
+                    <th>Nachname</th>
+                    <th>Geburtstag</th>
+                    <th>Email</th>
+                    <th>Adresse</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let customer of customers; let i = index">
+                    <!-- <th scope="row">{{ i + 1 }}</th> -->
+                    <td>{{ customer.firstName }}</td>
+                    <td>{{ customer.lastName }}</td>
+                    <td>{{ customer.dob.day + '/' + customer.dob.month + '/' + customer.dob.year}}</td>
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.street }}, {{ customer.housenumber }}, {{ customer.postalcode }}, {{ customer.city }}</td>
+                    <td>
+                        <button type="button" class="btn btn-info" (click)="onEdit(i)">Edit</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" (click)="onDelete(i)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
         </table>
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary" (click)="onNew()">New</button>
+        </div>
     </div>
-</body>
+
+    <br>
+    <div class="regentry" *ngIf="showNew">
+        <form (ngSubmit)="onSave()">
+            <div class="form-group row">
+                <label for="firstname-input" class="col-2 col-form-label">Vorname</label>
+                <div class="col-10">
+                    <input class="form-control" type="text" [(ngModel)]="regModel.firstName" name="firstName">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="lastname-input" class="col-2 col-form-label">Nachname</label>
+                <div class="col-10">
+                    <input class="form-control" type="text" [(ngModel)]="regModel.lastName" name="lastName">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="dob-input" class="col-2 col-form-label">Geburtstag</label>
+                <div class="col-3 input-group">
+                    <input type="text" class="form-control" placeholder="dd-mm-yyyy" name="dob" [(ngModel)]="regModel.dob" ngbDatepicker #dob="ngbDatepicker">
+                    <button class="input-group-addon" (click)="dob.toggle()" type="button">
+                        <img src="assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                    </button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="example-email-input" class="col-2 col-form-label">Email</label>
+                <div class="col-10">
+                    <input class="form-control" type="email" [(ngModel)]="regModel.email" name="email">
+                </div>
+            </div>
+            <!-- <div class="form-group row">
+                  <label for="example-password-input" class="col-2 col-form-label">Password</label>
+                  <div class="col-10">
+                    <input class="form-control" type="password" [(ngModel)]="regModel.password" name="password">
+                  </div>
+                </div> -->
+            <div class="form-group row">
+                <label for="street-input" class="col-2 col-form-label">Strasse</label>
+                <div class="col-10">
+                    <input class="form-control" type="text" [(ngModel)]="regModel.street" name="street">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="housenumber-input" class="col-2 col-form-label">Hausnummer</label>
+                <div class="col-10">
+                    <input class="form-control" type="text" [(ngModel)]="regModel.housenumber" name="housenumber">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="postalcode-input" class="col-2 col-form-label">PLZ</label>
+                <div class="col-10">
+                    <input class="form-control" type="text" [(ngModel)]="regModel.postalcode" name="postalcode">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="city-input" class="col-2 col-form-label">Ort</label>
+                <div class="col-10">
+                    <input class="form-control" type="text" [(ngModel)]="regModel.city" name="city">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">{{submitType}}</button>
+            <button type="submit" class="btn btn-primary" (click)="onCancel()">Cancel</button>
+        </form>
+    </div>
+</div>
