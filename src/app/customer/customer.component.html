@@ -1,45 +1,4 @@
 <div class="container">
-    <div class="reglist">
-        <form class="form-inline my-2 my-lg-0" class="text-right">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search-TODO</button>
-        </form>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <!-- <th>#</th> -->
-                    <th>Vorname</th>
-                    <th>Nachname</th>
-                    <th>Geburtstag</th>
-                    <th>Email</th>
-                    <th>Adresse</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let customer of customers; let i = index">
-                    <!-- <th scope="row">{{ i + 1 }}</th> -->
-                    <td>{{ customer.firstName }}</td>
-                    <td>{{ customer.lastName }}</td>
-                    <td>{{ customer.dob.day + '/' + customer.dob.month + '/' + customer.dob.year}}</td>
-                    <td>{{ customer.email }}</td>
-                    <td>{{ customer.street }}, {{ customer.housenumber }}, {{ customer.postalcode }}, {{ customer.city }}</td>
-                    <td>
-                        <button type="button" class="btn btn-info" (click)="onEdit(i)">Edit</button>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-danger" (click)="onDelete(i)">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="text-right">
-            <button type="submit" class="btn btn-primary" (click)="onNew()">New</button>
-        </div>
-    </div>
-
-    <br>
     <div class="regentry" *ngIf="showNew">
         <form (ngSubmit)="onSave()">
             <div class="form-group row">
@@ -103,4 +62,49 @@
             <button type="submit" class="btn btn-primary" (click)="onCancel()">Cancel</button>
         </form>
     </div>
+    <br>
+
+
+    <div class="reglist" *ngIf="!showNew">
+        <form class="form-inline my-2 my-lg-0" class="text-right">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search-TODO</button>
+        </form>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <!-- <th>#</th> -->
+                    <th>Vorname</th>
+                    <th>Nachname</th>
+                    <th>Geburtstag</th>
+                    <th>Email</th>
+                    <th>Adresse</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let customer of customers; let i = index">
+                    <!-- <th scope="row">{{ i + 1 }}</th> -->
+                    <td>{{ customer.firstName }}</td>
+                    <td>{{ customer.lastName }}</td>
+                    <td>{{ customer.dob | date:"dd/mm/yyyy"}}</td>
+                    <!-- <td>{{ customer.dob.day + '/' + customer.dob.month + '/' + customer.dob.year}}</td> -->
+                    <td>{{ customer.email }}</td>
+                    <td>{{ customer.street }} {{ customer.housenumber }}, {{ customer.postalcode }} {{ customer.city }}</td>
+                    <td>
+                        <button type="button" class="btn btn-info" (click)="onEdit(i)">Edit</button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" (click)="onDelete(i)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-right">
+            <button type="submit" class="btn btn-primary" (click)="onNew()">New</button>
+        </div>
+    </div>
+
 </div>

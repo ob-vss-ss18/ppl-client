@@ -14,6 +14,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
+import { GraphQLModule } from "./graphql.module";
 
 
 
@@ -35,6 +36,7 @@ import { HomeComponent } from './home/home.component';
     NgxElectronModule,
     NgbModule.forRoot(),
     FormsModule,
+    GraphQLModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Apollo } from "apollo-angular";
+import gql from "graphql-tag";
+import { Observable } from "rxjs/Observable";
+import "rxjs/add/operator/map";
 
 class Customer {
   constructor(
@@ -33,21 +37,46 @@ submitType: string = 'Save';
 // It maintains table row index based on selection.
 selectedRow: number;
 
-constructor() {
-  // Add default registration data.
-  this.customers.push(new Customer('Johan', 'Peter', {year: 1980, month: 5, day: 12}, 'johan@gmail.com', 'Strasse', '1', '78945', 'Ort1'));
-  this.customers.push(new Customer('Mohamed', 'Tariq', {year: 1975, month: 12, day: 3}, 'tariq@gmail.com', 'Strasse', '2', '78945', 'Ort2'));
-  this.customers.push(new Customer('Nirmal', 'Kumar', {year: 1970, month: 7, day: 25}, 'nirmal@gmail.com', 'Strasse', '3', '78945', 'Ort3'));
+customerList: Array<any> = []; // List of customers
+comments: Observable<any>;
+
+constructor(private apollo: Apollo) {
+
 }
 
 
   ngOnInit() {
-        // Initiate new customer.
-        this.regModel = new Customer();
-        // Change submitType to 'Save'.
-        this.submitType = 'Save';
-        // display customer entry section.
-        this.showNew = false;
+    this.displayCustomers();
+
+  }
+
+  // Get all customers
+  displayCustomers() {
+    const getCustomers = gql`
+      {
+        Customers {
+          id
+          firstName
+          lastName
+          dob
+          email
+          street
+          housenumber
+          postalcode
+          city
+        }
+      }
+    `;
+
+    this.apollo
+      .watchQuery({
+        query: getCustomers,
+        fetchPolicy: "network-only"
+      })
+      .valueChanges.map((result: any) => result.data.Customers)
+      .subscribe(data => {
+        this.customers = data;
+      });
   }
 
   // This method associate to New Button.
@@ -55,28 +84,126 @@ constructor() {
     // Initiate new customer.
     this.regModel = new Customer();
     // Change submitType to 'Save'.
-    this.submitType = 'Save';
+    this.submitType = "Save";
     // display customer entry section.
     this.showNew = true;
   }
 
   // This method associate to Save Button.
   onSave() {
-    if (this.submitType === 'Save') {
-      // Push customer model object into customers list.
-      this.customers.push(this.regModel);
+    var dateVal =
+      this.regModel.dob.year.toString() +
+      "-" +
+      this.regModel.dob.month.toString() +
+      "-" +
+      this.regModel.dob.day.toString();
+    if (this.submitType === "Save") {
+      const saveCustomer = gql`
+        mutation createCustomer(
+          $firstName: String!
+          $lastName: String!
+          $dob: GQDate!
+          $email: String!
+          $street: String!
+          $housenumber: String!
+          $postalcode: String!
+          $city: String!
+        ) {
+          createCustomer(
+            firstName: $firstName
+            lastName: $lastName
+            dob: $dob
+            email: $email
+            street: $street
+            housenumber: $housenumber
+            postalcode: $postalcode
+            city: $city
+          ) {
+            id
+            dob
+          }
+        }
+      `;
+      this.apollo
+        .mutate({
+          mutation: saveCustomer,
+          variables: {
+            firstName: this.regModel.firstName,
+            lastName: this.regModel.lastName,
+            dob: new Date(dateVal),
+            email: this.regModel.email,
+            street: this.regModel.street,
+            housenumber: this.regModel.housenumber,
+            postalcode: this.regModel.postalcode,
+            city: this.regModel.city
+          }
+        })
+        .subscribe(
+          ({ data }) => {
+            this.displayCustomers();
+          },
+          error => {
+            console.log("there was an error sending the query", error);
+          }
+        );
+
+      // Push customer model object into customer list.
+      // this.customers.push(this.regModel);
     } else {
-      // Update the existing properties values based on model.
-      this.customers[this.selectedRow].firstName = this.regModel.firstName;
-      this.customers[this.selectedRow].lastName = this.regModel.lastName;
-      this.customers[this.selectedRow].dob = this.regModel.dob;
-      this.customers[this.selectedRow].email = this.regModel.email;
-      this.customers[this.selectedRow].street = this.regModel.street;
-      this.customers[this.selectedRow].housenumber = this.regModel.housenumber;
-      this.customers[this.selectedRow].postalcode = this.regModel.postalcode;
-      this.customers[this.selectedRow].city = this.regModel.city;
+      const updateCustomer = gql`
+        mutation updateCustomer(
+          $id: ID!
+          $firstName: String!
+          $lastName: String!
+          $dob: GQDate!
+          $email: String!
+          $street: String!
+          $housenumber: String!
+          $postalcode: String!
+          $city: String!
+        ) {
+          updateCustomer(
+            id: $id
+            firstName: $firstName
+            lastName: $lastName
+            dob: $dob
+            email: $email
+            street: $street
+            housenumber: $housenumber
+            postalcode: $postalcode
+            city: $city
+          ) {
+            id
+            city
+          }
+        }
+      `;
+      this.apollo
+        .mutate({
+          mutation: updateCustomer,
+          variables: {
+            id: this.selectedRow + 1,
+            firstName: this.regModel.firstName,
+            lastName: this.regModel.lastName,
+            dob: new Date(dateVal),
+            email: this.regModel.email,
+            street: this.regModel.street,
+            housenumber: this.regModel.housenumber,
+            postalcode: this.regModel.postalcode,
+            city: this.regModel.city,
+          }
+        })
+        .subscribe(
+          ({ data }) => {
+            console.log("got editdata", data);
+            this.displayCustomers();
+          },
+          error => {
+            console.log("there was an error sending the query", error);
+          }
+        );
     }
-    // Hide registration entry section.
+    // Hide customer entry section.
     this.showNew = false;
   }
 
@@ -84,20 +211,50 @@ constructor() {
   onEdit(index: number) {
     // Assign selected table row index.
     this.selectedRow = index;
-    // Initiate new Customer.
+    // Initiate new customer.
     this.regModel = new Customer();
     // Retrieve selected customer from list and assign to model.
     this.regModel = Object.assign({}, this.customers[this.selectedRow]);
+    var birthday = this.customers[this.selectedRow].dob;
+    const dob = new Date(birthday.day, birthday.month, birthday.year);
+
+    this.regModel.dob = {
+      day: dob.getDate(),
+      month: dob.getMonth() + 1,
+      year: dob.getFullYear()
+    };
+
     // Change submitType to Update.
-    this.submitType = 'Update';
+    this.submitType = "Update";
     // Display customer entry section.
     this.showNew = true;
   }
 
   // This method associate to Delete Button.
   onDelete(index: number) {
-    // Delete the corresponding customer entry from the list.
-    this.customers.splice(index, 1);
+    const deleteCustomer = gql`
+      mutation deleteCustomer($id: ID!) {
+        deleteCustomer(id: $id) {
+          id
+        }
+      }
+    `;
+    this.apollo
+      .mutate({
+        mutation: deleteCustomer,
+        variables: {
+          id: index + 1
+        }
+      })
+      .subscribe(
+        ({ data }) => {
+          console.log("got editdata", data);
+          this.displayCustomers();
+        },
+        error => {
+          console.log("there was an error sending the query", error);
+        }
+      );
   }
 
   // This method associate toCancel Button.
@@ -105,5 +262,4 @@ constructor() {
     // Hide customer entry section.
     this.showNew = false;
   }
-
 }
