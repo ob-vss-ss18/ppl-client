@@ -209,14 +209,14 @@ constructor(private apollo: Apollo) {
 
   // This method associate to Edit Button.
   onEdit(index: number) {
+    
     // Assign selected table row index.
     this.selectedRow = index;
     // Initiate new customer.
     this.regModel = new Customer();
     // Retrieve selected customer from list and assign to model.
     this.regModel = Object.assign({}, this.customers[this.selectedRow]);
-    var birthday = this.customers[this.selectedRow].dob;
-    const dob = new Date(birthday.day, birthday.month, birthday.year);
+    const dob = new Date(this.customers[this.selectedRow].dob.toString());
 
     this.regModel.dob = {
       day: dob.getDate(),
