@@ -10,6 +10,12 @@ import { EquipmentComponent } from './equipment/equipment.component';
 import { CustomerComponent } from './customer/customer.component';
 import { RentalComponent } from './rental/rental.component';
 import { LoginCustomerComponent } from './login-customer/login-customer.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
+import { GraphQLModule } from "./graphql.module";
+
 
 
 @NgModule({
@@ -20,12 +26,17 @@ import { LoginCustomerComponent } from './login-customer/login-customer.componen
     EquipmentComponent,
     CustomerComponent,
     RentalComponent,
-    LoginCustomerComponent
+    LoginCustomerComponent,
+    NavbarComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgxElectronModule,
+    NgbModule.forRoot(),
+    FormsModule,
+    GraphQLModule
   ],
   providers: [],
   bootstrap: [AppComponent]

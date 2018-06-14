@@ -7,13 +7,16 @@ import { DemoComponent } from './demo/demo.component';
 import { EquipmentComponent } from './equipment/equipment.component';
 import { CustomerComponent } from './customer/customer.component';
 import { RentalComponent } from './rental/rental.component';
+import { HomeComponent } from './home/home.component';
+
 
 
 const routes: Routes = [
     {
         path: '',
        // component: DemoComponent
-        component: EquipmentComponent
+        //component: EquipmentComponent
+        component: HomeComponent
     },
     {
         path: 'login',
