@@ -30,6 +30,39 @@ const GQDate = new GraphQLScalarType({
 });
 
 // data store with default data
+const skis = [
+  {
+    id: 1,
+    manufacturer: "Fischer",
+    modell: "Cruzar Fire",
+    length: 145,
+    bodyheight: 160,
+    bodyweight: 50,
+    price_new: 199.99,
+    availability: true
+  },
+  {
+    id: 2,
+    manufacturer: "HEAD",
+    modell: "Primal Instinct",
+    length: 150,
+    bodyheight: 170,
+    bodyweight: 70,
+    price_new: 245.95,
+    availability: true
+  },
+  {
+    id: 3,
+    manufacturer: "BRUBAKER",
+    modell: "Ski",
+    length: 100,
+    bodyheight: 80,
+    bodyweight: 20,
+    price_new: 99.99,
+    availability: true
+  },
+]
+
 const customers = [
   {
     id: 1,
@@ -70,7 +103,9 @@ const resolvers = {
   Query: {
     Customers: () => customers, // return all customers
     Customer: (_, { id }) =>
-      customers.find(customer => customer.id == id) // return customer by id
+      customers.find(customer => customer.id == id), // return customer by id
+    Skis: () => skis,
+    Ski: (_, { id }) => skis.find(skis => ski.id == id)
   },
   Mutation: {
     // create a new customer
@@ -117,6 +152,51 @@ const resolvers = {
 	  customers[index].postalcode = args.postalcode;
       customers[index].city = args.city;
       return customers[index];
+    },
+
+    // create a new ski
+    createSki: (root, args) => {
+      // get next ski id
+      const nextId =
+        skis.reduce((id, ski) => {
+          return Math.max(id, ski.id);
+        }, -1) + 1;
+      const newSki = {
+        id: args.id,
+        manufacturer: args.manufacturer,
+        modell: args.modell,
+        length: args.length,
+        bodyheight: args.bodyheight,
+        bodyweight: args.bodyweight,
+        price_new: args.price_new,
+        availability: true
+      };
+      // add ski to collection
+      ski.push(newSki);
+      return newSki;
+    }, // delete ski by id
+    deleteSki: (root, args) => {
+      // find index by id
+      const index = ski.findIndex(
+        ski => ski.id == args.id
+      );
+      // remove ski by index
+      skis.splice(index, 1);
+    }, // update ski
+    updateSki: (root, args) => {
+      // find index by id
+      const index = skis.findIndex(
+        ski => ski.id == args.id
+      );
+
+      ski[index].manufacturer = args.manufacturer,
+      ski[index].modell = args.modell,
+      ski[index].length = args.length,
+      ski[index].bodyheight = args.bodyheight,
+      ski[index].bodyweight = args.bodyweight,
+      ski[index].price_new = args.price_new,
+      ski[index].availability = true
+      return ski[index];
     }
   },
   GQDate
