@@ -13,3 +13,8 @@ li.active {
 li a:not(.active):hover {
     background-color: rgba(86, 159, 255, 0.541);;
 }
+
+a.logout {
+    color: white;
+    cursor: pointer;
+}
