@@ -72,8 +72,8 @@ const customers = [
     email: "johan@gmail.com",
     street: "Strasse",
     housenumber: "1",
-	postalcode: "12345",
-	city: "Ort1"
+    postalcode: "12345",
+    city: "Ort1"
   },
   {
     id: 2,
@@ -83,8 +83,8 @@ const customers = [
     email: "ab@gmail.com",
     street: "Strasse",
     housenumber: "2",
-	postalcode: "47895",
-	city: "Ort2"
+    postalcode: "47895",
+    city: "Ort2"
   },
   {
     id: 3,
@@ -94,18 +94,18 @@ const customers = [
     email: "sill@gmail.com",
     street: "Strasse",
     housenumber: "3",
-	postalcode: "15984",
-	city: "Ort3"
+    postalcode: "15984",
+    city: "Ort3"
   }
 ];
 
 const resolvers = {
   Query: {
     Customers: () => customers, // return all customers
-    Customer: (_, { id }) =>
-      customers.find(customer => customer.id == id), // return customer by id
+    Customer: (_, { id }) => customers.find(customer => customer.id == id), // return customer by id
+
     Skis: () => skis,
-    Ski: (_, { id }) => skis.find(skis => ski.id == id)
+    Ski: (_, { id }) => skis.find(ski => ski.id == id)
   },
   Mutation: {
     // create a new customer
@@ -123,8 +123,8 @@ const resolvers = {
         email: args.email,
         street: args.street,
         housenumber: args.housenumber,
-		postalcode: args.postalcode,
-		city: args.city
+        postalcode: args.postalcode,
+        city: args.city
       };
       // add customer to collection
       customers.push(newCustomer);
@@ -162,7 +162,7 @@ const resolvers = {
           return Math.max(id, ski.id);
         }, -1) + 1;
       const newSki = {
-        id: args.id,
+        id: nextId,
         manufacturer: args.manufacturer,
         modell: args.modell,
         length: args.length,
@@ -172,12 +172,12 @@ const resolvers = {
         availability: true
       };
       // add ski to collection
-      ski.push(newSki);
+      skis.push(newSki);
       return newSki;
     }, // delete ski by id
     deleteSki: (root, args) => {
       // find index by id
-      const index = ski.findIndex(
+      const index = skis.findIndex(
         ski => ski.id == args.id
       );
       // remove ski by index
@@ -189,14 +189,14 @@ const resolvers = {
         ski => ski.id == args.id
       );
 
-      ski[index].manufacturer = args.manufacturer,
-      ski[index].modell = args.modell,
-      ski[index].length = args.length,
-      ski[index].bodyheight = args.bodyheight,
-      ski[index].bodyweight = args.bodyweight,
-      ski[index].price_new = args.price_new,
-      ski[index].availability = true
-      return ski[index];
+      skis[index].manufacturer = args.manufacturer,
+      skis[index].modell = args.modell,
+      skis[index].length = args.length,
+      skis[index].bodyheight = args.bodyheight,
+      skis[index].bodyweight = args.bodyweight,
+      skis[index].price_new = args.price_new,
+      skis[index].availability = true
+      return skis[index];
     }
   },
   GQDate

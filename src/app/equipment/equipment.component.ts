@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { Apollo } from "apollo-angular";
 import gql from "graphql-tag";
 import { Observable } from "rxjs/Observable";
@@ -150,7 +149,7 @@ constructor(private apollo: Apollo) {
           $price_new: Float!
           $availability: Boolean
         ) {
-          createSki(
+          updateSki(
             id: $id
             manufacturer: $manufacturer
             modell: $modell
