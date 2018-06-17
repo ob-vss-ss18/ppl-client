@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { LoginCustomerComponent } from './login-customer/login-customer.component';
@@ -8,15 +8,15 @@ import { EquipmentComponent } from './equipment/equipment.component';
 import { CustomerComponent } from './customer/customer.component';
 import { RentalComponent } from './rental/rental.component';
 import { HomeComponent } from './home/home.component';
+import { AuthGuard } from './auth/auth-guard';
 
 
 
 const routes: Routes = [
     {
         path: '',
-       // component: DemoComponent
-        //component: EquipmentComponent
-        component: HomeComponent
+        component: HomeComponent,
+        canActivate: [AuthGuard] 
     },
     {
         path: 'login',
@@ -24,19 +24,27 @@ const routes: Routes = [
     },
     {
         path: 'login-customer',
-        component: LoginCustomerComponent
+        component: LoginCustomerComponent,
+        canActivate: [AuthGuard] 
     },
     {
         path: 'equipment',
-        component: EquipmentComponent
+        component: EquipmentComponent,
+        canActivate: [AuthGuard] 
     },
     {
         path: 'customer',
-        component: CustomerComponent
+        component: CustomerComponent,
+        canActivate: [AuthGuard] 
     },
     {
         path: 'rental',
-        component: RentalComponent
+        component: RentalComponent,
+        canActivate: [AuthGuard] 
+    },
+    {
+      path: '**',
+      redirectTo: '',
     }
 ];
 
