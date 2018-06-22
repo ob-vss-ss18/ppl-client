@@ -1,0 +1,192 @@
+<app-navbar></app-navbar>
+
+<div class="container" *ngIf="!valuesSubmitted">
+    <h2>
+        Leasingvertrag erstellen
+      </h2>
+  <p>
+    <br> Vorname Nachname
+    <br> Anschrift
+    <br> Geburtsdatum
+  </p>
+
+  <form class="form-inline my-2 my-lg-0" class="text-right">
+    <input class="form-control mr-sm-2" type="text" placeholder="Search Equipment" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search-TODO</button>
+  </form>
+  <br>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="skiboard" checked>
+    <label class="form-check-label">
+      Ski/Board
+    </label>
+  </div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Hersteller</th>
+        <th>Modell</th>
+        <th>Länge</th>
+        <th>Körpergröße</th>
+        <th>Körpergewicht</th>
+        <th>Preis</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Fischer</td>
+        <td>Cruzar Fire</td>
+        <td>145</td>
+        <td>160</td>
+        <td>50</td>
+        <td>199.99</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="shoes">
+    <label class="form-check-label">
+      Schuhe
+    </label>
+  </div>
+
+
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+    <label class="form-check-label" for="defaultCheck1">
+      Steigfell
+    </label>
+  </div>
+
+
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="helmet">
+    <label class="form-check-label">
+      Helm
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="glasses">
+    <label class="form-check-label">
+      Brille
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="protector">
+    <label class="form-check-label">
+      Protektor
+    </label>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-2 col-form-label">Sonstiges</label>
+    <div class="col-10">
+      <input class="form-control" type="text" name="other">
+    </div>
+  </div>
+  <div>
+    Familienrabatt
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Anzahl Erwachsene</label>
+      <select class="form-control" id="exampleFormControlSelect1">
+        <option>1</option>
+        <option>2</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Anzahl Kinder</label>
+      <select class="form-control" id="exampleFormControlSelect1">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+  </div>
+  <div>
+    Saison
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+      <label class="form-check-label" for="inlineRadio1">1</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+      <label class="form-check-label" for="inlineRadio2">2</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+      <label class="form-check-label" for="inlineRadio3">3 </label>
+    </div>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="service">
+    <label class="form-check-label">
+      Serviceflatrate
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" name="insurance">
+    <label class="form-check-label">
+      Versicherung
+    </label>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-success" (click)="onSave()">Save</button>
+  <button type="submit" class="btn btn-primary" (click)="onCancel()">Cancel</button>
+  <br>
+  <br>
+</div>
+
+<div class="container" *ngIf="valuesSubmitted">
+  <div>Übersicht
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Summe der Neupreise</th>
+          <th>Testwert</th>
+          <th>Serviceflatrate</th>
+          <th>Versicherung</th>
+          <th>Gesamtwert</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>€€</td>
+          <td>€€</td>
+          <td>€€</td>
+          <td>€€</td>
+          <td>€€</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>Leasing
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Ausrüstung</th>
+          <th>Treuebonus</th>
+          <th>Serviceflatrate</th>
+          <th>Service</th>
+          <th>Versicherung</th>
+          <th>peak - Flatrate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>€€</td>
+          <td>€€</td>
+          <td>€€</td>
+          <td>€€</td>
+          <td>€€</td>
+          <td style="color: green"><b>***bester Preis***</b></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <button type="submit" class="btn btn-info" (click)="onBack()">Zurück zur Auswahl</button>
+</div>

@@ -17,6 +17,8 @@ import { HomeComponent } from './home/home.component';
 import { GraphQLModule } from "./graphql.module";
 import { AuthService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth-guard';
+import { CalculationsLeasingComponent } from './calculations-leasing/calculations-leasing.component';
+import { CalculationsPurchaseComponent } from './calculations-purchase/calculations-purchase.component';
 
 
 
@@ -30,7 +32,9 @@ import { AuthGuard } from './auth/auth-guard';
     RentalComponent,
     LoginCustomerComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    CalculationsLeasingComponent,
+    CalculationsPurchaseComponent
   ],
   imports: [
     BrowserModule,
