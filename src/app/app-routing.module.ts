@@ -9,6 +9,9 @@ import { CustomerComponent } from './customer/customer.component';
 import { RentalComponent } from './rental/rental.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth/auth-guard';
+import { CalculationsLeasingComponent } from './calculations-leasing/calculations-leasing.component';
+import { CalculationsPurchaseComponent } from './calculations-purchase/calculations-purchase.component';
+
 
 
 
@@ -40,6 +43,16 @@ const routes: Routes = [
     {
         path: 'rental',
         component: RentalComponent,
+        canActivate: [AuthGuard] 
+    },
+    {
+        path: 'calculations-leasing',
+        component: CalculationsLeasingComponent,
+        canActivate: [AuthGuard] 
+    },
+    {
+        path: 'calculations-purchase',
+        component: CalculationsPurchaseComponent,
         canActivate: [AuthGuard] 
     },
     {

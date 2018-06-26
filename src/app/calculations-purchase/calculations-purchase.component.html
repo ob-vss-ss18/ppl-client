@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+
+  <div class="container">
+      <h2>
+          Restwertermittlung
+        </h2>
+      <p>
+        <br> Vorname Nachname
+        <br> Anschrift
+        <br> Geburtsdatum
+      </p>
+  <div>Gesamt
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Ski/Board</th>
+            <th>Steigfell</th>
+            <th>Schuhe</th>
+            <th>Stöcke</th>
+            <th>Helm</th>
+            <th>Brille</th>
+            <th>Protektor</th>
+            <th>Sonstiges</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>€€</td>
+            <td>€€</td>
+            <td>€€</td>
+            <td>€€</td>
+            <td>€€</td>
+            <td>€€</td>
+            <td>€€</td>
+            <td>€€</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button type="submit" class="btn btn-success" (click)="onSave()">Save</button><br><br>
+<div *ngIf="valuesSubmitted">
+    <button type="submit" class="btn btn-outline-success">Rechnung als PDF drucken</button><br><br>
+</div>
+
+    <button type="submit" class="btn btn-success" (click)="onCancel()">Cancel</button><br>
+    </div>
